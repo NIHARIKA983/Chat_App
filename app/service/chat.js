@@ -17,5 +17,13 @@ class Service {
         .then((data) => resolve(data))
         .catch(() => reject());
     };
+
+    getChat = async (id) => {
+      try {
+        return await chatModel.getChat(id);
+      } catch (err) {
+        return err;
+      }
+    }
 }
 module.exports = new Service();

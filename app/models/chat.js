@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const chatSchema = mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'Registration' },
+  chatName: {
+    type: String
+  },
 
   username: {
     type: String
@@ -41,5 +44,13 @@ class Model {
         .catch((err) => reject(err));
     });
   };
+
+  getChat = async (id) => {
+    try {
+      return await ChatRegister.find({ $and: [{ username: id.chatName }, { userId: id.userId }] });
+    } catch (err) {
+      return err;
+    }
+  }
 }
 module.exports = new Model();

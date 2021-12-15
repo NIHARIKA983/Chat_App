@@ -10,4 +10,5 @@ module.exports = (app) => {
 
     app.post('/NewChat', middleware.validateToken, chatController.newChat);
     app.get('/getChat', middleware.validateToken, chatController.getAllChat);
+    app.get('/getChatByName', middleware.validateToken, chatController.getChat);
 }   

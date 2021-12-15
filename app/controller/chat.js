@@ -11,6 +11,7 @@ class Chat {
         };
   
         chatService.newChat(chat, (error, data) => {
+          console.log("in cotroller",chat)
           if (error) {
             return res.status(400).json({
               message: 'failed to post chat',
@@ -53,5 +54,30 @@ class Chat {
         });
       }
     };
+
+    getChat = async (req, res) => {
+      try {
+        const id = { userId: req.user.dataForToken.id, chatName: req.body.chatName };
+        const data = await chatService.getChat(id);
+        if (data.message) {
+          return res.status(404).json({
+            message: 'Chat not found',
+            success: false
+          });
+        }
+        return res.status(200).json({
+          message: 'Chat retrieved succesfully',
+          success: true,
+          data: data
+  
+        });
+      } catch (err) {
+        return res.status(500).json({
+          message: 'Internal Error',
+          success: false,
+          data: err
+        });
+      }
+    }
 }
 module.exports = new Chat();

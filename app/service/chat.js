@@ -10,5 +10,12 @@ class Service {
       }
       );
     }
+
+    getAllChat = ( resolve, reject) => {
+      chatModel
+        .getAllChat()
+        .then((data) => resolve(data))
+        .catch(() => reject());
+    };
 }
 module.exports = new Service();

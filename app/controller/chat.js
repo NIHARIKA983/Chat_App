@@ -31,5 +31,27 @@ class Chat {
         });
       }
     }
+    getAllChat = (req, res) => {
+      try {
+        chatService.getAllChat(resolve, reject);
+        function resolve (data) {
+          return res.status(201).json({
+            message: 'Get All Chats successfully',
+            success: true,
+            data: data
+          });
+        }
+        function reject () {
+          return res.status(400).json({
+            message: 'failed to get all Chats',
+            success: false
+          });
+        }
+      } catch {
+        return res.status(500).json({
+          message: 'Internal Error'
+        });
+      }
+    };
 }
 module.exports = new Chat();

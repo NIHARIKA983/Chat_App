@@ -33,5 +33,13 @@ class Model {
       }
     });
   }
+
+  getAllChat = () => {
+    return new Promise((resolve, reject) => {
+      ChatRegister.find()
+        .then((data) => resolve(data))
+        .catch((err) => reject(err));
+    });
+  };
 }
 module.exports = new Model();
